@@ -4,7 +4,11 @@
   "description": "node word directory app using node js.",
   "main": "dict.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "chmod +x dict.js"
+  },
+  "bin": {
+    "dict": "dict.js"
   },
   "repository": {
     "type": "git",
