@@ -1,4 +1,5 @@
 const ora = require("ora");
+const axios = require('axios');
 
 // Constants
 const constants = require("./constants");
@@ -6,33 +7,47 @@ const commands = constants.Commands;
 
 module.exports = async function performWordAction(wordAction, commandWord) {
   const spinner = ora("Loading...").start();
-  console.log(wordAction);
-  console.log(commandWord);
   if (wordAction) {
     switch (wordAction) {
       case commands.DEFINITION:
         await findDefinition(commandWord);
         break;
       case commands.SYNONYM:
-        await findDefinition(commandWord);
+        await findSynonym(commandWord);
         break;
       case commands.ANTONYMS:
-        await findDefinition(commandWord);
+        await findAntonym(commandWord);
         break;
       case commands.EXAMPLE:
-        await findDefinition(commandWord);
+        await findExample(commandWord);
         break;
       case commands.PLAY:
-        await findDefinition(commandWord);
+        await findPlayGame(commandWord);
         break;
       default:
         break;
     }
   }
-  spinner.succeed('Finished');
+  spinner.succeed("Finished");
   return false;
 };
 
 async function findDefinition(commandWord) {
+  console.log("findDefinition");
+}
+
+async function findSynonym(commandWord) {
+  console.log("findDefinition");
+}
+
+async function findAntonym(commandWord) {
+  console.log("findDefinition");
+}
+
+async function findExample(commandWord) {
+  console.log("findDefinition");
+}
+
+async function findPlayGame(commandWord) {
   console.log("findDefinition");
 }

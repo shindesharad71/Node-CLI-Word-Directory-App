@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/shindesharad71/Node-CLI-Word-Directory-App#readme",
   "dependencies": {
+    "axios": "^0.19.2",
     "chalk": "^3.0.0",
     "minimist": "^1.2.0",
     "ora": "^4.0.3"
