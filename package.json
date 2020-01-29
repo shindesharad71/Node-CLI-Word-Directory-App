@@ -1,0 +1,26 @@
+{
+  "name": "node-cli-word-directory-app",
+  "version": "1.0.0",
+  "description": "node word directory app using node js.",
+  "main": "dict.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shindesharad71/Node-CLI-Word-Directory-App.git"
+  },
+  "keywords": [
+    "cli",
+    "directory",
+    "node",
+    "word",
+    "app"
+  ],
+  "author": "Sharad Shinde",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shindesharad71/Node-CLI-Word-Directory-App/issues"
+  },
+  "homepage": "https://github.com/shindesharad71/Node-CLI-Word-Directory-App#readme"
+}
