@@ -7,15 +7,15 @@ const ora = require("ora");
 
 // Constants
 const constants = require("./constants");
-
-const commandConstants = constants.Commands;
 const validCommands = constants.ValidCommands;
 
 const args = minimist(process.argv.slice(2));
-const commandInput = args._[0];
+const commandWordAction = args._[0];
+const commandWord = args._[1];
 
-if (commandInput && validCommands.includes(commandInput)) {
-    console.log(commandInput);
+if (commandWordAction && validCommands.includes(commandWordAction)) {
+    console.log(commandWordAction);
+    console.log(commandWord);
 } else {
     console.log('Play word of the day');
 }
