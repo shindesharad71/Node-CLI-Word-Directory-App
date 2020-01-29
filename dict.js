@@ -1,7 +1,13 @@
 #!/usr/bin/env node
 
-const chalk = require('chalk');
-const minimist = require('minimist');
-const ora = require('ora');
+// Packages
+const chalk = require("chalk");
+const minimist = require("minimist");
+const ora = require("ora");
 
-console.log(chalk.yellow('Chalk Added'));
+// Constants
+const commandConstants = require("./constants");
+
+const args = minimist(process.argv.slice(2));
+const commandInput = args._[0] || commandConstants.Commands.HELP;
+console.log(commandInput);
