@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 // Packages
-const chalk = require("chalk");
 const minimist = require("minimist");
 
 // Constants

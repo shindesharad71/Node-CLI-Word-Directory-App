@@ -1,5 +1,6 @@
 const ora = require("ora");
 const axios = require("axios");
+const chalk = require("chalk");
 const API_KEY = require("./apiKey");
 
 const API_BASE_URL = "https://fourtytwowords.herokuapp.com";
@@ -11,22 +12,32 @@ const commands = constants.Commands;
 module.exports = async function performWordAction(wordAction, commandWord) {
   try {
     let wordInfo;
+    let title;
     if (wordAction) {
       switch (wordAction) {
         case commands.DEFINITION:
           wordInfo = await findDefinition(commandWord);
+          title = `Definition for ${commandWord} - \n`;
           break;
         case commands.SYNONYM:
           wordInfo = await findSynonym(commandWord);
+          title = `Synonym for ${commandWord} - \n`;
+
           break;
         case commands.ANTONYMS:
           wordInfo = await findAntonym(commandWord);
+          title = `Antonym for ${commandWord} - \n`;
+
           break;
         case commands.EXAMPLE:
           wordInfo = await findExample(commandWord);
+          title = `Example for ${commandWord} - \n`;
+
           break;
         case commands.PLAY:
           wordInfo = await findPlayGame(commandWord);
+          title = `Definition for ${commandWord} -\n`;
+
           break;
         default:
           break;
@@ -34,7 +45,7 @@ module.exports = async function performWordAction(wordAction, commandWord) {
     } else {
       wordInfo = await getWordOfTheDay();
     }
-    printOutput(wordAction, commandWord, wordInfo);
+    printOutput(title, wordInfo, wordAction);
     return false;
   } catch (error) {
     console.error(error.data ? error.data : error);
@@ -83,6 +94,8 @@ async function getWordOfTheDay() {
   return randomWord.data;
 }
 
-function printOutput(wordAction, commandWord, wordInfo) {
+function printOutput(title, wordInfo, wordAction) {
+  console.log(title);
+
   console.log(wordInfo);
 }
