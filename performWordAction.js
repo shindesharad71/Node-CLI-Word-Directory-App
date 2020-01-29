@@ -62,7 +62,7 @@ async function findAntonym(commandWord) {
 
 async function findExample(commandWord) {
   const wordExample = await axios.get(
-    `${API_BASE_URL}/word/${commandWord}/definitions?api_key=${API_KEY}`
+    `${API_BASE_URL}/word/${commandWord}/examples?api_key=${API_KEY}`
   );
   return wordExample.data;
 }
