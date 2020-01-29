@@ -1,5 +1,6 @@
 const ora = require("ora");
 const axios = require('axios');
+const API_KEY = require('./apiKey') || 'Please Provide API Key';
 
 // Constants
 const constants = require("./constants");
