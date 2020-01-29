@@ -13,8 +13,4 @@ const args = minimist(process.argv.slice(2));
 const commandWordAction = args._[0];
 const commandWord = args._[1];
 
-if (commandWordAction) {
-  performWordAction(commandWordAction, commandWord);
-} else {
-  console.log("Play word of the day");
-}
+performWordAction(commandWordAction, commandWord);
