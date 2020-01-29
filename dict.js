@@ -3,7 +3,6 @@
 // Packages
 const chalk = require("chalk");
 const minimist = require("minimist");
-const ora = require("ora");
 
 // Constants
 const constants = require("./constants");

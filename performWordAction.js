@@ -1,8 +1,11 @@
+const ora = require("ora");
+
 // Constants
 const constants = require("./constants");
 const commands = constants.Commands;
 
 module.exports = async function performWordAction(wordAction, commandWord) {
+  const spinner = ora("Loading...").start();
   console.log(wordAction);
   console.log(commandWord);
   if (wordAction) {
@@ -26,6 +29,7 @@ module.exports = async function performWordAction(wordAction, commandWord) {
         break;
     }
   }
+  spinner.succeed('Finished');
   return false;
 };
 
