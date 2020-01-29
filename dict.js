@@ -13,9 +13,9 @@ const args = minimist(process.argv.slice(2));
 const commandWordAction = args._[0];
 const commandWord = args._[1];
 
-if (commandWordAction && validCommands.includes(commandWordAction)) {
-    console.log(commandWordAction);
-    console.log(commandWord);
+if (commandWordAction) {
+  console.log(commandWordAction);
+  console.log(commandWord);
 } else {
-    console.log('Play word of the day');
+  console.log("Play word of the day");
 }
