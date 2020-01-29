@@ -1,5 +1,4 @@
 module.exports.Commands = {
-  HELP: "help",
   DEFINITION: "defn",
   SYNONYM: "syn",
   ANTONYMS: "ant",
