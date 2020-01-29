@@ -10,29 +10,31 @@ const commands = constants.Commands;
 
 module.exports = async function performWordAction(wordAction, commandWord) {
   try {
+    let wordInfo;
     if (wordAction) {
       switch (wordAction) {
         case commands.DEFINITION:
-          await findDefinition(commandWord);
+          wordInfo = await findDefinition(commandWord);
           break;
         case commands.SYNONYM:
-          await findSynonym(commandWord);
+          wordInfo = await findSynonym(commandWord);
           break;
         case commands.ANTONYMS:
-          await findAntonym(commandWord);
+          wordInfo = await findAntonym(commandWord);
           break;
         case commands.EXAMPLE:
-          await findExample(commandWord);
+          wordInfo = await findExample(commandWord);
           break;
         case commands.PLAY:
-          await findPlayGame(commandWord);
+          wordInfo = await findPlayGame(commandWord);
           break;
         default:
           break;
       }
     } else {
-      await getWordOfTheDay();
+      wordInfo = await getWordOfTheDay();
     }
+    printOutput(wordAction, commandWord, wordInfo);
     return false;
   } catch (error) {
     console.error(error.data ? error.data : error);
@@ -79,4 +81,8 @@ async function getWordOfTheDay() {
     `${API_BASE_URL}/words/randomWord?api_key=${API_KEY}`
   );
   return randomWord.data;
+}
+
+function printOutput(wordAction, commandWord, wordInfo) {
+  console.log(wordInfo);
 }
