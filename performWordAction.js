@@ -1,13 +1,13 @@
 const ora = require("ora");
 const axios = require('axios');
-const API_KEY = require('./apiKey') || 'Please Provide API Key';
+const API_KEY = require('./apiKey');
 
 // Constants
 const constants = require("./constants");
 const commands = constants.Commands;
 
 module.exports = async function performWordAction(wordAction, commandWord) {
-  const spinner = ora("Loading...").start();
+  const spinner = ora().start("Loading...");
   if (wordAction) {
     switch (wordAction) {
       case commands.DEFINITION:
@@ -29,7 +29,7 @@ module.exports = async function performWordAction(wordAction, commandWord) {
         break;
     }
   }
-  spinner.succeed("Finished");
+  spinner.stop();
   return false;
 };
 
