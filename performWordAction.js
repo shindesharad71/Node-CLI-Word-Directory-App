@@ -100,6 +100,11 @@ function printOutput(wordInfo, wordAction) {
   if (wordAction) {
     switch (wordAction) {
       case commands.DEFINITION:
+        if (wordInfo && wordInfo.length) {
+          wordInfo.forEach((definition, i) => {
+            console.log(chalk.green(`\t ${i + 1}. ${definition.text}`));
+          });
+        }
         break;
       case commands.SYNONYM:
         if (wordInfo && wordInfo.length) {
@@ -133,10 +138,9 @@ function printOutput(wordInfo, wordAction) {
         }
         break;
       case commands.PLAY:
+        break;
       default:
         break;
     }
   }
-  // console.log(title);
-  // console.log(wordInfo);
 }
