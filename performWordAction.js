@@ -39,10 +39,10 @@ module.exports = async function performWordAction(wordAction, commandWord) {
           await printExample(commandWord, wordInfo);
           break;
         case commands.PLAY:
-          wordInfo = await findPlayGame(commandWord);
           console.log(
-            chalk.yellow(`\nDefinition for ${chalk.yellow(commandWord)} -\n`)
+            chalk.yellow(`\nStarting The Word Game...!\n`)
           );
+          await startWordGame();
           break;
         default:
           await performWordAction(commands.DEFINITION, wordAction);
@@ -87,11 +87,8 @@ async function findExample(commandWord) {
   return wordExample.data;
 }
 
-async function findPlayGame(commandWord) {
-  const wordPlayGame = await axios.get(
-    `${API_BASE_URL}/word/${commandWord}/definitions?api_key=${API_KEY}`
-  );
-  return wordPlayGame.data;
+async function startWordGame() {
+  console.log('Start Game');
 }
 
 async function getWordOfTheDay() {
@@ -99,17 +96,4 @@ async function getWordOfTheDay() {
     `${API_BASE_URL}/words/randomWord?api_key=${API_KEY}`
   );
   return randomWord.data;
-}
-
-function printOutput(wordInfo, wordAction) {
-  // console.log(wordInfo);
-
-  if (wordAction) {
-    switch (wordAction) {
-      case commands.PLAY:
-        break;
-      default:
-        break;
-    }
-  }
 }
