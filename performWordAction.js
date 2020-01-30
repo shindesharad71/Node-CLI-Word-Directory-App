@@ -53,7 +53,12 @@ module.exports = async function performWordAction(wordAction, commandWord) {
       }
     } else {
       wordInfo = await getWordOfTheDay();
-      console.log(wordInfo);
+      if (wordInfo.word) {
+        console.log(
+          chalk.cyan(`\nWord of the day is - ${chalk.bold(wordInfo.word)}`)
+        );
+        await performWordAction(wordInfo.word, null);
+      }
     }
     return false;
   } catch (error) {
