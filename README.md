@@ -1,7 +1,10 @@
-
 # **Command Line Dictionary Tool**
 
 A command-line dictionary tool using node js.
+
+## Demo
+
+<img src="https://github.com/shindesharad71/Node-CLI-Word-Directory-App/blob/master/assets/demo-1.png?raw=true" width="70%" alt="Demo" title="Demo">
 
 ## Setup
 
@@ -30,7 +33,7 @@ Display synonyms of a given word.
 
 `./dic ant <word>`
 
-Display antonyms of a given word. Note that not all words would have Antonyms  (End point: /relatedWords). Example words with antonyms: single, break, start.
+Display antonyms of a given word. Note that not all words would have Antonyms (End point: /relatedWords). Example words with antonyms: single, break, start.
 
 **4. Word Examples**
 
