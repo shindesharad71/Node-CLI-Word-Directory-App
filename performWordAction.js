@@ -45,12 +45,16 @@ module.exports = async function performWordAction(wordAction, commandWord) {
           );
           break;
         default:
+          await performWordAction(commands.DEFINITION, wordAction);
+          await performWordAction(commands.SYNONYM, wordAction);
+          await performWordAction(commands.ANTONYMS, wordAction);
+          await performWordAction(commands.EXAMPLE, wordAction);
           break;
       }
     } else {
       wordInfo = await getWordOfTheDay();
+      console.log(wordInfo);
     }
-    // printOutput(wordInfo, wordAction);
     return false;
   } catch (error) {
     spinner.fail(error.response.data.error);
