@@ -4,7 +4,7 @@ A command-line dictionary tool using node js.
 
 ## Demo
 
-<img src="https://github.com/shindesharad71/Node-CLI-Word-Directory-App/blob/master/assets/demo-1.png?raw=true" width="90%" alt="Demo" title="Demo">
+<img src="https://github.com/shindesharad71/Node-CLI-Word-Directory-App/blob/master/assets/demo-1.png?raw=true" alt="Demo" title="Demo">
 
 ## Setup
 
