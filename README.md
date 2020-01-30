@@ -3,6 +3,13 @@
 
 A command-line dictionary tool using node js.
 
+## Setup
+
+1. Clone or Download Code
+2. `cd` to project folder
+3. run `npm i` to install all the dependencies.
+4. Rename `apiKey.example.js` to `apiKey.js` and Add _API KEY_.
+
 ## Features
 
 The command-line tool has the following functions -
