@@ -8,36 +8,43 @@ const API_BASE_URL = "https://fourtytwowords.herokuapp.com";
 // Constants
 const constants = require("./constants");
 const commands = constants.Commands;
+const spinner = ora();
 
 module.exports = async function performWordAction(wordAction, commandWord) {
   try {
     let wordInfo;
-    let title;
+
     if (wordAction) {
       switch (wordAction) {
         case commands.DEFINITION:
           wordInfo = await findDefinition(commandWord);
-          title = `Definition for ${commandWord} - \n`;
+          console.log(
+            chalk.yellow(`\nDefinition for ${chalk.bold(commandWord)} - \n`)
+          );
           break;
         case commands.SYNONYM:
           wordInfo = await findSynonym(commandWord);
-          title = `Synonym for ${commandWord} - \n`;
-
+          console.log(
+            chalk.yellow(`\nSynonym for ${chalk.yellow(commandWord)} - \n`)
+          );
           break;
         case commands.ANTONYMS:
           wordInfo = await findAntonym(commandWord);
-          title = `Antonym for ${commandWord} - \n`;
-
+          console.log(
+            chalk.yellow(`\nAntonym for ${chalk.yellow(commandWord)} - \n`)
+          );
           break;
         case commands.EXAMPLE:
           wordInfo = await findExample(commandWord);
-          title = `Example for ${commandWord} - \n`;
-
+          console.log(
+            chalk.yellow(`\nExample for ${chalk.yellow(commandWord)} - \n`)
+          );
           break;
         case commands.PLAY:
           wordInfo = await findPlayGame(commandWord);
-          title = `Definition for ${commandWord} -\n`;
-
+          console.log(
+            chalk.yellow(`\nDefinition for ${chalk.yellow(commandWord)} -\n`)
+          );
           break;
         default:
           break;
@@ -45,10 +52,10 @@ module.exports = async function performWordAction(wordAction, commandWord) {
     } else {
       wordInfo = await getWordOfTheDay();
     }
-    printOutput(title, wordInfo, wordAction);
+    printOutput(wordInfo, wordAction);
     return false;
   } catch (error) {
-    console.error(error.data ? error.data : error);
+    spinner.fail(error.response.data.error);
   }
 };
 
@@ -94,8 +101,27 @@ async function getWordOfTheDay() {
   return randomWord.data;
 }
 
-function printOutput(title, wordInfo, wordAction) {
-  console.log(title);
-
-  console.log(wordInfo);
+function printOutput(wordInfo, wordAction) {
+  if (wordAction) {
+    switch (wordAction) {
+      case commands.DEFINITION:
+        break;
+      case commands.SYNONYM:
+        break;
+      case commands.ANTONYMS:
+        break;
+      case commands.EXAMPLE:
+        if(wordInfo.examples && wordInfo.examples.length) {
+          wordInfo.examples.forEach((example, i) => {
+            console.log(chalk.green(`\t ${i+1}. ${example.text}`));
+          });
+        }
+        break;
+      case commands.PLAY:
+      default:
+        break;
+    }
+  }
+  // console.log(title);
+  // console.log(wordInfo);
 }
