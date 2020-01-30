@@ -23,13 +23,13 @@ module.exports = async function performWordAction(wordAction, commandWord) {
           );
           break;
         case commands.SYNONYM:
-          wordInfo = await findSynonym(commandWord);
+          wordInfo = await findAndAntonymSynonym(commandWord);
           console.log(
             chalk.yellow(`\nSynonym for ${chalk.yellow(commandWord)} - \n`)
           );
           break;
         case commands.ANTONYMS:
-          wordInfo = await findAntonym(commandWord);
+          wordInfo = await findAndAntonymSynonym(commandWord);
           console.log(
             chalk.yellow(`\nAntonym for ${chalk.yellow(commandWord)} - \n`)
           );
@@ -66,18 +66,11 @@ async function findDefinition(commandWord) {
   return wordDefinition.data;
 }
 
-async function findSynonym(commandWord) {
+async function findAndAntonymSynonym(commandWord) {
   const wordSynonym = await axios.get(
     `${API_BASE_URL}/word/${commandWord}/relatedWords?api_key=${API_KEY}`
   );
   return wordSynonym.data;
-}
-
-async function findAntonym(commandWord) {
-  const wordAntonym = await axios.get(
-    `${API_BASE_URL}/word/${commandWord}/definitions?api_key=${API_KEY}`
-  );
-  return wordAntonym.data;
 }
 
 async function findExample(commandWord) {
@@ -102,18 +95,40 @@ async function getWordOfTheDay() {
 }
 
 function printOutput(wordInfo, wordAction) {
+  // console.log(wordInfo);
+
   if (wordAction) {
     switch (wordAction) {
       case commands.DEFINITION:
         break;
       case commands.SYNONYM:
+        if (wordInfo && wordInfo.length) {
+          const synonym = wordInfo.find(
+            words => words.relationshipType === "synonym"
+          );
+          if (synonym && synonym.words.length) {
+            synonym.words.forEach((word, i) => {
+              console.log(chalk.green(`\t ${i + 1}. ${word}`));
+            });
+          }
+        }
         break;
       case commands.ANTONYMS:
+        if (wordInfo && wordInfo.length) {
+          const synonym = wordInfo.find(
+            words => words.relationshipType === "antonym"
+          );
+          if (synonym && synonym.words.length) {
+            synonym.words.forEach((word, i) => {
+              console.log(chalk.green(`\t ${i + 1}. ${word}`));
+            });
+          }
+        }
         break;
       case commands.EXAMPLE:
-        if(wordInfo.examples && wordInfo.examples.length) {
+        if (wordInfo.examples && wordInfo.examples.length) {
           wordInfo.examples.forEach((example, i) => {
-            console.log(chalk.green(`\t ${i+1}. ${example.text}`));
+            console.log(chalk.green(`\t ${i + 1}. ${example.text}`));
           });
         }
         break;
