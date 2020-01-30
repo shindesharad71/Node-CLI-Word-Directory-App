@@ -2,6 +2,12 @@ const ora = require("ora");
 const axios = require("axios");
 const chalk = require("chalk");
 const API_KEY = require("./apiKey");
+const {
+  printDefinition,
+  printSynonym,
+  printAntonym,
+  printExample
+} = require("./print");
 
 const API_BASE_URL = "https://fourtytwowords.herokuapp.com";
 
@@ -18,27 +24,19 @@ module.exports = async function performWordAction(wordAction, commandWord) {
       switch (wordAction) {
         case commands.DEFINITION:
           wordInfo = await findDefinition(commandWord);
-          console.log(
-            chalk.yellow(`\nDefinition for ${chalk.bold(commandWord)} - \n`)
-          );
+          await printDefinition(commandWord, wordInfo);
           break;
         case commands.SYNONYM:
           wordInfo = await findAndAntonymSynonym(commandWord);
-          console.log(
-            chalk.yellow(`\nSynonym for ${chalk.yellow(commandWord)} - \n`)
-          );
+          await printSynonym(commandWord, wordInfo);
           break;
         case commands.ANTONYMS:
           wordInfo = await findAndAntonymSynonym(commandWord);
-          console.log(
-            chalk.yellow(`\nAntonym for ${chalk.yellow(commandWord)} - \n`)
-          );
+          await printAntonym(commandWord, wordInfo);
           break;
         case commands.EXAMPLE:
           wordInfo = await findExample(commandWord);
-          console.log(
-            chalk.yellow(`\nExample for ${chalk.yellow(commandWord)} - \n`)
-          );
+          await printExample(commandWord, wordInfo);
           break;
         case commands.PLAY:
           wordInfo = await findPlayGame(commandWord);
@@ -52,7 +50,7 @@ module.exports = async function performWordAction(wordAction, commandWord) {
     } else {
       wordInfo = await getWordOfTheDay();
     }
-    printOutput(wordInfo, wordAction);
+    // printOutput(wordInfo, wordAction);
     return false;
   } catch (error) {
     spinner.fail(error.response.data.error);
@@ -99,44 +97,6 @@ function printOutput(wordInfo, wordAction) {
 
   if (wordAction) {
     switch (wordAction) {
-      case commands.DEFINITION:
-        if (wordInfo && wordInfo.length) {
-          wordInfo.forEach((definition, i) => {
-            console.log(chalk.green(`\t ${i + 1}. ${definition.text}`));
-          });
-        }
-        break;
-      case commands.SYNONYM:
-        if (wordInfo && wordInfo.length) {
-          const synonym = wordInfo.find(
-            words => words.relationshipType === "synonym"
-          );
-          if (synonym && synonym.words.length) {
-            synonym.words.forEach((word, i) => {
-              console.log(chalk.green(`\t ${i + 1}. ${word}`));
-            });
-          }
-        }
-        break;
-      case commands.ANTONYMS:
-        if (wordInfo && wordInfo.length) {
-          const synonym = wordInfo.find(
-            words => words.relationshipType === "antonym"
-          );
-          if (synonym && synonym.words.length) {
-            synonym.words.forEach((word, i) => {
-              console.log(chalk.green(`\t ${i + 1}. ${word}`));
-            });
-          }
-        }
-        break;
-      case commands.EXAMPLE:
-        if (wordInfo.examples && wordInfo.examples.length) {
-          wordInfo.examples.forEach((example, i) => {
-            console.log(chalk.green(`\t ${i + 1}. ${example.text}`));
-          });
-        }
-        break;
       case commands.PLAY:
         break;
       default:
